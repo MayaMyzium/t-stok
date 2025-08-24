@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>台股預測儀表板</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>台股預測儀表板</h1>
+        <p>結合市場新聞、數學模型與程序模擬，提供台股大盤、台積電與元大台灣50漲跌預估。</p>
+    </header>
+    <main>
+        <section class="dashboard">
+            <div class="card">
+                <h2>台灣加權指數 (TAIEX)</h2>
+                <canvas id="chart-twindex"></canvas>
+                <div class="price-range" id="range-twindex"></div>
+            </div>
+            <div class="card">
+                <h2>台積電 (2330)</h2>
+                <canvas id="chart-2330"></canvas>
+                <div class="price-range" id="range-2330"></div>
+            </div>
+            <div class="card">
+                <h2>元大台灣50 (0050)</h2>
+                <canvas id="chart-0050"></canvas>
+                <div class="price-range" id="range-0050"></div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>資料來源：FinMind API。預測僅供參考，投資前請自行評估風險。</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
