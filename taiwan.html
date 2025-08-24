@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>台股預測儀表板</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional simple styling for the Taiwan page */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #f1f1f1;
+        }
+        #update-time {
+            font-size: 0.9rem;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>台股預測儀表板</h1>
+        <p>每天早上 8:30 更新昨日預測，每 10 分鐘更新即時漲跌與進出場點位</p>
+    </header>
+    <main>
+        <section>
+            <h2>每日預測</h2>
+            <p>以下表格顯示加權指數 (TAIEX)、台積電 (2330) 與元大台灣50 (0050) 的明日漲跌機率與預測價位。模型採用邏輯迴歸，特徵包括收盤漲跌幅、成交量變化率與融資餘額變化率【568328348583858†screenshot】。</p>
+            <table id="daily-table">
+                <thead>
+                    <tr>
+                        <th>指標</th>
+                        <th>漲幅機率</th>
+                        <th>跌幅機率</th>
+                        <th>預測價</th>
+                        <th>預測區間</th>
+                        <th>建議多單進場</th>
+                        <th>建議空單進場</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data loaded by JavaScript -->
+                </tbody>
+            </table>
+        </section>
+        <section>
+            <h2>即時更新（開盤後每 10 分鐘）</h2>
+            <p>此區域展示當日 9:00 開盤後最新價格與漲跌幅。僅在開盤後運行。</p>
+            <p id="update-time">更新時間：--</p>
+            <table id="realtime-table">
+                <thead>
+                    <tr>
+                        <th>指標</th>
+                        <th>最新價格</th>
+                        <th>漲跌幅 (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data loaded by JavaScript -->
+                </tbody>
+            </table>
+        </section>
+        <section>
+            <p class="note">資料來自 FinMind API，由簡易數學模型計算，僅供教育用途，不構成投資建議。</p>
+            <a href="index.html">← 回到虛擬貨幣儀表板</a>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 台股預測儀表板</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="taiwan.js"></script>
+</body>
+</html>

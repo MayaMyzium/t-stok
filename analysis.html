@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>進一步分析 - 虛擬貨幣儀表板</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>進一步分析</h1>
+        <p>合約多空比與專家觀點</p>
+    </header>
+    <main>
+        <section id="long-short-analysis">
+            <h2>Binance 永續合約多空比</h2>
+            <p>以下表格顯示主要虛擬貨幣在Binance永續合約中的多空倉位比率（全球帳戶多空比）。多空比大於1代表多單略多，小於1代表空單較多。</p>
+            <!-- 動態插入表格 -->
+        </section>
+
+        <section id="advanced-model">
+            <h2>改良型多空比信號</h2>
+            <p>如果您想進一步運用複雜模型分析永續合約做多/做空點位，本專案提供 <code>advanced_analysis.py</code> 腳本。該腳本實現了一套可落地交易的公式：
+                先對多空比（LSR）進行 winsorize 及滾動 z 分數處理，再結合變化率、成交量 z 分數、價格動能與 ATR、自動分位門檻與趨勢過濾，最後產生綜合信號 <code>S^*</code> 以及自適應進出場點位。建議在 1小時或 15 分鐘的 K 線資料上使用，並至少保留 1000 根歷史資料作為分位數計算參考。</p>
+            <p>您可以將自己的資料（時間、open、high、low、close、volume、lsr）整理成 CSV，再使用 Python 執行以下範例計算信號與進出場價位：</p>
+            <pre style="white-space: pre-line; overflow-x: auto; background-color: #f8f9fa; padding: 10px; border-radius: 4px;"><code>import pandas as pd
+from advanced_analysis import compute_signals
+
+df = pd.read_csv('your_data.csv')
+signals = compute_signals(
+    price=df['close'].values,
+    high=df['high'].values,
+    low=df['low'].values,
+    lsr=df['lsr'].values,
+    volume=df['volume'].values
+)
+print(signals.tail())</code></pre>
+            <p>程式會回傳一個 DataFrame，其中包含信號、進場價（<code>entry_long</code>/<code>entry_short</code>）、止損點（<code>sl_long</code>/<code>sl_short</code>）與建議部位大小等欄位，可作為策略參考。請注意，示例僅供學習用途，不構成投資建議。</p>
+        </section>
+
+        <section id="expert-view">
+            <h2>專家視角</h2>
+            <p>作為一名經濟學家與資深操盤手，我們會關注多空比、價格走勢以及交易量等指標來判斷市場情緒。使用者可綜合恐懼貪婪指數、RSI、長短倉比等多種數據，建立自己的操作策略。請注意，數據僅供參考，不構成投資建議。</p>
+        </section>
+
+        <section>
+            <a href="index.html">← 回到首頁</a>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 虛擬貨幣儀表板</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

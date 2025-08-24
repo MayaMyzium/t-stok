@@ -1,41 +1,72 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>台股預測儀表板</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Chart.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>虛擬貨幣資訊儀表板</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>台股預測儀表板</h1>
-        <p>結合市場新聞、數學模型與程序模擬，提供台股大盤、台積電與元大台灣50漲跌預估。</p>
+        <h1>虛擬貨幣資訊儀表板</h1>
+        <p>即時監控恐懼貪婪指數、比特幣地址餘額、價格與RSI指標</p>
     </header>
+
     <main>
-        <section class="dashboard">
+        <section id="fear-greed">
+            <h2>恐懼與貪婪指數</h2>
             <div class="card">
-                <h2>台灣加權指數 (TAIEX)</h2>
-                <canvas id="chart-twindex"></canvas>
-                <div class="price-range" id="range-twindex"></div>
+                <p id="fng-value">載入中…</p>
+                <!-- 使用官方提供的即時圖片作為備用顯示 -->
+                <img id="fng-image" src="https://alternative.me/crypto/fear-and-greed-index.png" alt="Fear & Greed Index" />
             </div>
-            <div class="card">
-                <h2>台積電 (2330)</h2>
-                <canvas id="chart-2330"></canvas>
-                <div class="price-range" id="range-2330"></div>
-            </div>
-            <div class="card">
-                <h2>元大台灣50 (0050)</h2>
-                <canvas id="chart-0050"></canvas>
-                <div class="price-range" id="range-0050"></div>
-            </div>
+            <p class="note">恐懼貪婪指數由Alternative.me提供，值域為0（極度恐慌）至100（極度貪婪），指標可作為市場情緒參考【762950707989567†L59-L79】。</p>
+        </section>
+
+        <section id="address-section">
+            <h2>比特幣地址餘額變化圖</h2>
+            <p>下方圖表顯示指定比特幣地址自創建以來每日餘額的變化。資料透過BlockCypher的地址端點取得，該端點支援最多2000筆交易並可使用<code>before</code>參數分頁【963741525815197†L3496-L3504】。</p>
+            <div id="address-charts"></div>
+            <p class="note">注意：部份地址（如冷錢包）交易筆數過多，可能需要多次API請求才能取得完整資料，或自行以Python腳本離線計算。</p>
+        </section>
+
+        <section id="rsi-prices">
+            <h2>虛擬貨幣價格與RSI</h2>
+            <p>本區展示主要虛擬貨幣（BTC、ETH、XRP、DOGE、ADA）的即時價格及14日RSI。RSI是衡量價格動能的振盪指標，當RSI大於70通常被視為過熱、可能出現回檔；低於30則被視為超賣，可能存在反彈機會【800268421240992†L375-L393】。</p>
+            <table id="price-table">
+                <thead>
+                    <tr>
+                        <th>幣種</th>
+                        <th>價格 (USDT)</th>
+                        <th>RSI (14日)</th>
+                        <th>建議區間</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 動態填入資料 -->
+                </tbody>
+            </table>
+        </section>
+
+        <section id="long-short">
+            <h2>合約多空分析</h2>
+            <p>點擊下方連結進入進階分析頁面，查看Binance和OKX永續合約多空倉位比率，以及每分鐘價格變化的技術分析。</p>
+            <a href="analysis.html">進一步分析</a>
+        </section>
+
+        <section id="taiwan-stock">
+            <h2>台股預測儀表板</h2>
+            <p>點擊下方連結進入台灣股市分析頁面，查看加權指數、台積電（2330）與元大台灣50（0050）的每日預測與即時更新。</p>
+            <a href="taiwan.html">台股分析</a>
         </section>
     </main>
+
     <footer>
-        <p>資料來源：FinMind API。預測僅供參考，投資前請自行評估風險。</p>
+        <p>&copy; 2025 虛擬貨幣儀表板</p>
     </footer>
 
+    <!-- 引入 Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
