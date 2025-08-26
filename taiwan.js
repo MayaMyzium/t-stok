@@ -2,7 +2,8 @@
 // 讀取 daily 和 intraday JSON，填入表格
 
 function loadDaily() {
-    fetch('data/latest_predictions_taiwan.json')
+    // 讀取根目錄的 latest_predictions_taiwan.json（無 data 目錄）
+    fetch('./latest_predictions_taiwan.json')
         .then(res => res.json())
         .then(data => {
             const tbody = document.querySelector('#daily-table tbody');
@@ -35,7 +36,8 @@ function loadDaily() {
 }
 
 function loadRealtime() {
-    fetch('data/realtime_taiwan.json')
+    // 讀取根目錄的 realtime_taiwan.json（無 data 目錄）
+    fetch('./realtime_taiwan.json')
         .then(res => res.json())
         .then(data => {
             const tbody = document.querySelector('#realtime-table tbody');

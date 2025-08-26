@@ -1,0 +1,25 @@
+上傳說明（無 data 資料夾版本）
+==================================
+
+此資料夾已將 `latest_predictions_taiwan.json` 和 `realtime_taiwan.json` 移到專案根目錄，無需建立 data 資料夾。
+
+1. **解壓縮**：將整個 `combined_website_flat` 資料夾解壓縮後的所有檔案（含 .html、.css、.js、.json、.py、README 等）放到 GitHub 儲存庫的根目錄。
+
+2. **上傳檔案**：
+   - 在 GitHub 中，點選 `Add file` → `Upload files`。
+   - 將所有檔案一次選取並拖拉到網頁中（瀏覽器支援文件批次上傳）。
+   - 如果不能拖拉資料夾，可先進入資料夾，批次選擇所有檔案後上傳。
+   - 也可以使用 Git 客戶端（如 GitHub Desktop）將檔案複製到儲存庫並提交。
+
+3. **提交變更**：為 commit 輸入說明，例如「Add combined crypto and Taiwan stock dashboard」，並按下 `Commit changes` 完成上傳。
+
+4. **啟用 GitHub Pages**：
+   - 進入儲存庫設定中的 `Pages`。
+   - 在「Source」選擇 `main` 分支和 `/ (root)`，儲存設定。
+   - 幾分鐘後便可透過 `https://你的帳號.github.io/你的repo/` 訪問首頁，並在網址後加 `taiwan.html` 瀏覽台股分析頁面。
+
+5. **自訂網域**（可選）：
+   - 在專案根目錄建立 `CNAME` 檔，內容填入你的域名（如 `example.com`）。
+   - 到 Namecheap DNS 設定四筆 A 記錄指向 GitHub IP，以及 CNAME 指向 `username.github.io`，詳情見 README。
+
+完成以上步驟後，你的網站將成功部署，且不會因為缺少資料夾而出現404錯誤。
