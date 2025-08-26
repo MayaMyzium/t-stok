@@ -10,7 +10,7 @@
 ## 部署到 GitHub Pages
 
 1. 登入你的 GitHub 帳號，建立一個新的儲存庫。若想使用使用者頁面，可將儲存庫命名為 `你的帳號.github.io`，或者用其他名稱建立專案頁面。
-2. 將 `crypto_website` 資料夾內的所有檔案（包含 `index.html`、`analysis.html`、`styles.css`、`script.js` 等）上傳至此儲存庫的根目錄。
+2. 將本資料夾內的所有檔案（包含 `index.html`、`analysis.html`、`styles.css`、`script.js`、`taiwan.html`、`taiwan.js`、`taiwan_summary.js`、各 `.json` 資料檔、Python 腳本等）上傳至儲存庫的根目錄。**此版本已將所有預測檔案移至專案根目錄，不再使用 `data/` 資料夾。**
 3. （建議）新增一個 `CNAME` 檔案，內容填入你在 Namecheap 購買的自訂網域，例如：
 
    ```
@@ -47,7 +47,8 @@
 
 4. **前端介面** – 新增 `taiwan.html` 和 `taiwan.js` 兩個檔案：
    * `taiwan.html` 提供每日預測表格與即時價格表格，並說明模型假設與資料來源。
-   * `taiwan.js` 會在頁面載入時讀取 `data/latest_predictions_taiwan.json` 與 `data/realtime_taiwan.json`，填入表格並每 10 分鐘更新一次即時資料。
+   * `taiwan.js` 在 `taiwan.html` 中載入，頁面載入時讀取 `latest_predictions_taiwan.json` 與 `realtime_taiwan.json`（根目錄檔案），填入表格並每 10 分鐘更新一次即時資料。
+   * 在 `analysis.html` 中新增 `taiwan-summary.js` 及 `<section id="taiwan-summary">`，用於讀取當日 `latest_predictions_taiwan.json` 以摘要方式呈現台股預測，方便在進一步分析頁面快速查看。
 
 5. **連結整合** – 在首頁 `index.html` 增加「台股預測儀表板」區塊，提供連結至 `taiwan.html`。這樣從虛擬貨幣儀表板即可點擊進入台股分析頁面。
 
@@ -65,7 +66,7 @@ python fetch_and_predict_taiwan.py --mode daily
 python fetch_and_predict_taiwan.py --mode intraday
 ```
 
-執行結果會生成 `data/latest_predictions_taiwan.json` 和 `data/realtime_taiwan.json`，前端頁面將自動顯示最新資料。
+執行結果會在專案根目錄生成 `latest_predictions_taiwan.json` 和 `realtime_taiwan.json`，前端頁面將自動顯示最新資料。本版本不包含 `data` 資料夾，請確保 JSON 檔案直接位於專案根目錄。
 
 ### 說明與免責
 

@@ -1,25 +1,25 @@
 上傳說明（無 data 資料夾版本）
 ==================================
 
-此資料夾已將 `latest_predictions_taiwan.json` 和 `realtime_taiwan.json` 移到專案根目錄，無需建立 data 資料夾。
+此資料夾（`combined_website_final`）已將所有預測檔案移到專案根目錄，不再需要建立 `data` 資料夾。請依照以下步驟將網站部署到 GitHub Pages：
 
-1. **解壓縮**：將整個 `combined_website_flat` 資料夾解壓縮後的所有檔案（含 .html、.css、.js、.json、.py、README 等）放到 GitHub 儲存庫的根目錄。
+1. **解壓縮**：將整個 `combined_website_final` 資料夾解壓縮後，確保包含 `.html`、`.css`、`.js`、`.json`、`.py`、`README.md`、`UPLOAD_INSTRUCTIONS.txt` 等檔案。
 
 2. **上傳檔案**：
-   - 在 GitHub 中，點選 `Add file` → `Upload files`。
-   - 將所有檔案一次選取並拖拉到網頁中（瀏覽器支援文件批次上傳）。
-   - 如果不能拖拉資料夾，可先進入資料夾，批次選擇所有檔案後上傳。
-   - 也可以使用 Git 客戶端（如 GitHub Desktop）將檔案複製到儲存庫並提交。
+   - 登入你的 GitHub 帳號，建立一個新的儲存庫（或使用既有儲存庫）。
+   - 點選 `Add file` → `Upload files`，選擇所有檔案（包括 `index.html`、`analysis.html`、`taiwan.html`、`styles.css`、`script.js`、`taiwan.js`、`taiwan_summary.js`、`latest_predictions_taiwan.json`、`realtime_taiwan.json`、Python 腳本等）並上傳至儲存庫根目錄。
+   - 如果你使用 Git 客戶端（例如 GitHub Desktop），可將檔案複製到本地儲存庫資料夾後提交 (commit) 並推送 (push)。
 
-3. **提交變更**：為 commit 輸入說明，例如「Add combined crypto and Taiwan stock dashboard」，並按下 `Commit changes` 完成上傳。
+3. **提交變更**：輸入 commit 訊息，例如「Add combined crypto and Taiwan stock dashboard」，然後提交。確認所有檔案（包含 JSON、JS、CSS、HTML 以及 `taiwan_summary.js`）均在儲存庫根目錄。
 
 4. **啟用 GitHub Pages**：
-   - 進入儲存庫設定中的 `Pages`。
-   - 在「Source」選擇 `main` 分支和 `/ (root)`，儲存設定。
-   - 幾分鐘後便可透過 `https://你的帳號.github.io/你的repo/` 訪問首頁，並在網址後加 `taiwan.html` 瀏覽台股分析頁面。
+   - 前往儲存庫的 **Settings → Pages** 頁面。
+   - 在 **Source** 部分選擇 `main` 分支及 `/(root)` 目錄，點擊 Save。
+   - GitHub 會自動建置並發布網站。幾分鐘後你可以透過 `https://你的帳號.github.io/儲存庫名稱/` 訪問首頁，並透過 `.../analysis.html` 或 `.../taiwan.html` 存取進一步分析與台股預測頁面。
 
-5. **自訂網域**（可選）：
-   - 在專案根目錄建立 `CNAME` 檔，內容填入你的域名（如 `example.com`）。
-   - 到 Namecheap DNS 設定四筆 A 記錄指向 GitHub IP，以及 CNAME 指向 `username.github.io`，詳情見 README。
+5. **自訂網域（可選）**：
+   - 若要將 Namecheap 的網域指向 GitHub Pages，請在儲存庫根目錄建立 `CNAME` 檔，內容填入你的網域（例如 `example.com`）。
+   - 進入 Namecheap 的 **Advanced DNS** 設定，新增四筆 **A 記錄** 指向 GitHub Pages 的 IP（185.199.108.153、185.199.109.153、185.199.110.153、185.199.111.153）以及一筆 **CNAME 記錄**，將 `www` 指向 `你的帳號.github.io`。
+   - 回到 GitHub Pages 設定頁確認自訂網域已經填入並啟用 HTTPS。
 
-完成以上步驟後，你的網站將成功部署，且不會因為缺少資料夾而出現404錯誤。
+完成上述步驟後，你的網站將成功部署。若有任何找不到資料的情況，請確認預測 JSON (`latest_predictions_taiwan.json`、`realtime_taiwan.json`) 已放在根目錄，且瀏覽器已正確載入 `taiwan_summary.js`。

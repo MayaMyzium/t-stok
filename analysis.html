@@ -18,6 +18,26 @@
             <!-- 動態插入表格 -->
         </section>
 
+        <!-- 台股預測摘要 -->
+        <section id="taiwan-summary">
+            <h2>台股預測摘要</h2>
+            <p>此區顯示今日台股大盤、台積電（2330）與元大台灣50（0050）的漲跌機率與預測價位，資料來源於 FinMind API 結合統計模型的預測結果。數據僅供參考，不構成投資建議。</p>
+            <table id="taiwan-summary-table">
+                <thead>
+                    <tr>
+                        <th>標的</th>
+                        <th>漲機率</th>
+                        <th>跌機率</th>
+                        <th>預測收盤價</th>
+                        <th>預測區間</th>
+                        <th>建議多單價位</th>
+                        <th>建議空單價位</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+
         <section id="advanced-model">
             <h2>改良型多空比信號</h2>
             <p>如果您想進一步運用複雜模型分析永續合約做多/做空點位，本專案提供 <code>advanced_analysis.py</code> 腳本。該腳本實現了一套可落地交易的公式：
@@ -43,6 +63,12 @@ print(signals.tail())</code></pre>
             <p>作為一名經濟學家與資深操盤手，我們會關注多空比、價格走勢以及交易量等指標來判斷市場情緒。使用者可綜合恐懼貪婪指數、RSI、長短倉比等多種數據，建立自己的操作策略。請注意，數據僅供參考，不構成投資建議。</p>
         </section>
 
+        <section id="taiwan-link">
+            <h2>台股預測</h2>
+            <p>本專案亦提供台股預測儀表板，利用 FinMind 資料與簡易統計模型預測下一個交易日台灣加權指數、台積電（2330）及元大台灣50（0050）的漲跌機率與目標區間。若要查看最新的台股分析，請點擊下方連結。</p>
+            <a href="taiwan.html">前往台股預測儀表板</a>
+        </section>
+
         <section>
             <a href="index.html">← 回到首頁</a>
         </section>
@@ -52,5 +78,6 @@ print(signals.tail())</code></pre>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
+    <script src="taiwan_summary.js"></script>
 </body>
 </html>
