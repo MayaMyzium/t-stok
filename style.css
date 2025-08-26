@@ -1,73 +1,176 @@
-/* Basic styling for the stock dashboard */
-* {
-    box-sizing: border-box;
-}
-
+/* 基本排版 */
 body {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f7f9fc;
-    color: #333;
+  font-family: Arial, "Microsoft JhengHei", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f7fa;
+  color: #333;
 }
 
 header {
-    background-color: #1e90ff;
-    color: #ffffff;
-    padding: 30px 20px;
-    text-align: center;
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 1rem 2rem;
+  text-align: center;
 }
 
 header h1 {
-    margin: 0;
-    font-size: 2rem;
-    letter-spacing: 1px;
+  margin: 0 0 0.5rem 0;
+  font-size: 2rem;
 }
 
 header p {
-    margin-top: 10px;
-    font-size: 0.95rem;
+  margin: 0;
+  font-size: 1rem;
 }
 
-main .dashboard {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    padding: 20px;
+section {
+  padding: 2rem;
+  margin: 1rem auto;
+  max-width: 900px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+section h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: #34495e;
 }
 
 .card {
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin: 10px;
-    width: 320px;
-    max-width: 90vw;
-    text-align: center;
-    transition: transform 0.2s ease-in-out;
+  background: #fdfdfd;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  padding: 1rem;
+  text-align: center;
 }
 
-.card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.card h2 {
-    margin-bottom: 15px;
-    font-size: 1.2rem;
+.card .value {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0;
+  color: #e74c3c;
 }
 
-.price-range {
-    margin-top: 10px;
-    font-size: 0.9rem;
-    color: #555;
+.card .classification {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
 }
 
-footer {
-    text-align: center;
-    padding: 15px;
-    font-size: 0.8rem;
-    color: #666;
+.card .update-info {
+  font-size: 0.8rem;
+  color: #7f8c8d;
+}
+
+.chart-container {
+  position: relative;
+  height: 300px;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+/* Crypto grid */
+.crypto-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.crypto-card {
+  background: #fdfdfd;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.crypto-card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.2rem;
+  color: #2c3e50;
+}
+
+.crypto-card .price {
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+}
+
+.crypto-card .rsi {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+}
+
+.crypto-card .recommendation {
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* 表格呈現主要幣種 */
+.crypto-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+.crypto-table th,
+.crypto-table td {
+  border: 1px solid #e1e4e8;
+  padding: 0.5rem;
+  text-align: center;
+}
+.crypto-table thead {
+  background-color: #f0f3f6;
+  font-weight: bold;
+}
+
+.btn {
+  display: inline-block;
+  background-color: #3498db;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.btn:hover {
+  background-color: #2980b9;
+}
+
+/* 分析表格樣式 */
+table.analysis-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+table.analysis-table th,
+table.analysis-table td {
+  border: 1px solid #e1e4e8;
+  padding: 0.4rem;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+table.analysis-table thead {
+  background-color: #f0f3f6;
+  font-weight: bold;
+}
+
+/* 響應式 */
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.5rem;
+  }
+  section {
+    padding: 1rem;
+  }
 }

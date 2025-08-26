@@ -1,83 +1,106 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>進一步分析 - 虛擬貨幣儀表板</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+<html lang="zh-Hant">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>永續合約做多做空分析</title>
+      <!-- 為情緒分數折線圖重新引入圖表庫 -->
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <link rel="stylesheet" href="style.css" />
+    </head>
+  <body>
     <header>
-        <h1>進一步分析</h1>
-        <p>合約多空比與專家觀點</p>
+      <h1>永續合約做多／做空分析</h1>
+      <p>
+        本頁面統整幣安與 Bybit 兩大交易所的做多／做空永續合約資訊，以表格呈現每種虛擬貨幣的多空比率、變化量與資金費率，並計算情緒分數。下方再以折線圖顯示過去一週情緒分數的變化趨勢。
+      </p>
     </header>
-    <main>
-        <section id="long-short-analysis">
-            <h2>Binance 永續合約多空比</h2>
-            <p>以下表格顯示主要虛擬貨幣在Binance永續合約中的多空倉位比率（全球帳戶多空比）。多空比大於1代表多單略多，小於1代表空單較多。</p>
-            <!-- 動態插入表格 -->
-        </section>
+    <section>
+      <p>
+        下列表格呈現幣安與 Bybit 交易所永續合約的多空比率、其變化量，以及每個平台的資金費率和依據您提供公式計算出的「情緒分數」。為簡化閱讀，每種虛擬貨幣僅列出最近三筆多空比率資料。比率大於 1 表示多倉佔比較高，反之則為空倉佔比較高；資金費率以小數百分比顯示。情緒分數（SS）範圍 -1 至 +1，用來綜合評估市場情緒。
+      </p>
+      <div id="analysis-container">
+        <!-- 動態產生表格 -->
+      </div>
+      <h3>情緒分數一週走勢</h3>
+      <p>以下折線圖根據您提供的公式，計算出過去一週每小時的情緒分數（SS）。每條線代表一種虛擬貨幣，數值越大代表看多情緒越強，越小代表看空情緒越強。</p>
+      <div class="chart-container" style="height: 300px;">
+        <canvas id="sentimentChart"></canvas>
+      </div>
+    </section>
 
-        <!-- 台股預測摘要 -->
-        <section id="taiwan-summary">
-            <h2>台股預測摘要</h2>
-            <p>此區顯示今日台股大盤、台積電（2330）與元大台灣50（0050）的漲跌機率與預測價位，資料來源於 FinMind API 結合統計模型的預測結果。數據僅供參考，不構成投資建議。</p>
-            <table id="taiwan-summary-table">
-                <thead>
-                    <tr>
-                        <th>標的</th>
-                        <th>漲機率</th>
-                        <th>跌機率</th>
-                        <th>預測收盤價</th>
-                        <th>預測區間</th>
-                        <th>建議多單價位</th>
-                        <th>建議空單價位</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </section>
 
-        <section id="advanced-model">
-            <h2>改良型多空比信號</h2>
-            <p>如果您想進一步運用複雜模型分析永續合約做多/做空點位，本專案提供 <code>advanced_analysis.py</code> 腳本。該腳本實現了一套可落地交易的公式：
-                先對多空比（LSR）進行 winsorize 及滾動 z 分數處理，再結合變化率、成交量 z 分數、價格動能與 ATR、自動分位門檻與趨勢過濾，最後產生綜合信號 <code>S^*</code> 以及自適應進出場點位。建議在 1小時或 15 分鐘的 K 線資料上使用，並至少保留 1000 根歷史資料作為分位數計算參考。</p>
-            <p>您可以將自己的資料（時間、open、high、low、close、volume、lsr）整理成 CSV，再使用 Python 執行以下範例計算信號與進出場價位：</p>
-            <pre style="white-space: pre-line; overflow-x: auto; background-color: #f8f9fa; padding: 10px; border-radius: 4px;"><code>import pandas as pd
-from advanced_analysis import compute_signals
+    <!-- 幣別 CETS 分析結果 -->
+    <section id="coin-cets-result-section">
+      <h2>幣別 CETS 分析結果</h2>
+      <p>根據各幣種的專屬 CETS 模型，以下表格展示目前的 CETS 值與判斷區間，系統每 10 分鐘自動更新一次。</p>
+      <table class="analysis-table">
+        <thead>
+          <tr>
+            <th>幣種</th>
+            <th>CETS 值</th>
+            <th>判斷區間</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>BTC</td><td id="cets-value-btc">--</td><td id="cets-category-btc">--</td></tr>
+          <tr><td>ETH</td><td id="cets-value-eth">--</td><td id="cets-category-eth">--</td></tr>
+          <tr><td>XRP</td><td id="cets-value-xrp">--</td><td id="cets-category-xrp">--</td></tr>
+          <tr><td>DOGE</td><td id="cets-value-doge">--</td><td id="cets-category-doge">--</td></tr>
+          <tr><td>ADA</td><td id="cets-value-ada">--</td><td id="cets-category-ada">--</td></tr>
+          <tr><td>SOL</td><td id="cets-value-sol">--</td><td id="cets-category-sol">--</td></tr>
+        </tbody>
+      </table>
+    </section>
 
-df = pd.read_csv('your_data.csv')
-signals = compute_signals(
-    price=df['close'].values,
-    high=df['high'].values,
-    low=df['low'].values,
-    lsr=df['lsr'].values,
-    volume=df['volume'].values
-)
-print(signals.tail())</code></pre>
-            <p>程式會回傳一個 DataFrame，其中包含信號、進場價（<code>entry_long</code>/<code>entry_short</code>）、止損點（<code>sl_long</code>/<code>sl_short</code>）與建議部位大小等欄位，可作為策略參考。請注意，示例僅供學習用途，不構成投資建議。</p>
-        </section>
+    <!-- 幣別 TS 分析結果 -->
+    <section id="coin-ts-result-section">
+      <h2>幣別 TS 分析結果</h2>
+      <p>以下為根據 TS 多因子公式計算的即時結果，系統每 10 分鐘自動更新一次。TS > 0.6 為強烈看漲；0.3 ≤ TS ≤ 0.6 為中性；TS < 0.3 為看跌。</p>
+      <table class="analysis-table">
+        <thead>
+          <tr>
+            <th>幣種</th>
+            <th>TS 值</th>
+            <th>判斷</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>BTC</td><td id="ts-value-btc">--</td><td id="ts-category-btc">--</td></tr>
+          <tr><td>ETH</td><td id="ts-value-eth">--</td><td id="ts-category-eth">--</td></tr>
+          <tr><td>XRP</td><td id="ts-value-xrp">--</td><td id="ts-category-xrp">--</td></tr>
+          <tr><td>DOGE</td><td id="ts-value-doge">--</td><td id="ts-category-doge">--</td></tr>
+          <tr><td>ADA</td><td id="ts-value-ada">--</td><td id="ts-category-ada">--</td></tr>
+          <tr><td>SOL</td><td id="ts-value-sol">--</td><td id="ts-category-sol">--</td></tr>
+        </tbody>
+      </table>
+    </section>
 
-        <section id="expert-view">
-            <h2>專家視角</h2>
-            <p>作為一名經濟學家與資深操盤手，我們會關注多空比、價格走勢以及交易量等指標來判斷市場情緒。使用者可綜合恐懼貪婪指數、RSI、長短倉比等多種數據，建立自己的操作策略。請注意，數據僅供參考，不構成投資建議。</p>
-        </section>
-
-        <section id="taiwan-link">
-            <h2>台股預測</h2>
-            <p>本專案亦提供台股預測儀表板，利用 FinMind 資料與簡易統計模型預測下一個交易日台灣加權指數、台積電（2330）及元大台灣50（0050）的漲跌機率與目標區間。若要查看最新的台股分析，請點擊下方連結。</p>
-            <a href="taiwan.html">前往台股預測儀表板</a>
-        </section>
-
-        <section>
-            <a href="index.html">← 回到首頁</a>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2025 虛擬貨幣儀表板</p>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="script.js"></script>
+    <!-- 台股預測摘要 -->
+    <section id="taiwan-summary-section">
+      <h2>台股預測摘要</h2>
+      <p>以下表格根據每日早上 8:30 從預測模型產出的資料，顯示台股大盤（加權指數）、台積電（2330）及元大台灣50（0050）的上漲機率、下跌機率、預測價格區間以及建議的做多/做空點位。本資料僅供學習參考，不構成投資建議。</p>
+      <table class="analysis-table">
+        <thead>
+          <tr>
+            <th>標的</th>
+            <th>上漲機率</th>
+            <th>下跌機率</th>
+            <th>預測價格</th>
+            <th>預測區間</th>
+            <th>做多點位</th>
+            <th>做空點位</th>
+          </tr>
+        </thead>
+        <tbody id="taiwan-summary-body">
+          <tr><td colspan="7">載入中…</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <a href="index.html" class="btn">返回儀表板</a>
+    </section>
+    <script src="analysis.js"></script>
     <script src="taiwan_summary.js"></script>
-</body>
+  </body>
 </html>
